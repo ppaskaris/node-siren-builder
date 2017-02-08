@@ -66,7 +66,7 @@ $ npm install siren-builder
 
 If you are not building Siren representations imperatively and are able to
 specify them in one expression, you may prefer to use [node-siren-writer][1] for
-syntatic brevity.
+syntactic brevity.
 
 
 [1]: https://github.com/dominicbarnes/node-siren-writer

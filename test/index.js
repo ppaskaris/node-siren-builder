@@ -24,6 +24,12 @@ Tap.test('SirenAction', (t) => {
     incomplete.setMethod('TRACE');
   });
 
+  const conflict = Siren.action()
+    .addField('duplicate', Siren.field());
+  t.throws(() => {
+    conflict.addField('duplicate', Siren.field());
+  });
+
   const action = Siren.action()
     .copy()
     .clone()
@@ -80,6 +86,13 @@ Tap.test('SirenAction', (t) => {
 Tap.test('SirenEntity', (t) => {
   const incomplete = Siren.entity();
   t.deepEqual(incomplete.toJSON(), {});
+
+
+  const conflict = Siren.entity()
+    .addAction('duplicate', Siren.action());
+  t.throws(() => {
+    conflict.addAction('duplicate', Siren.action());
+  });
 
   const entity = Siren.entity()
     .copy()

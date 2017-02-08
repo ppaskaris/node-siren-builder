@@ -2,6 +2,11 @@
   "name": "node-siren-builder",
   "version": "1.0.0",
   "description": "A fluent Siren hypermedia representation builder.",
+  "keywords": [
+    "siren",
+    "hypermedia",
+    "fluent"
+  ],
   "main": "index.js",
   "scripts": {
     "build:docs": "jsdoc2md index.js > API.md",
