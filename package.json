@@ -1,5 +1,5 @@
 {
-  "name": "node-siren-builder",
+  "name": "siren-builder",
   "version": "1.0.0",
   "description": "A fluent Siren hypermedia representation builder.",
   "keywords": [
