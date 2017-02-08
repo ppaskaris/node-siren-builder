@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * A fluent Siren hypermedia representation builder.
+ * @module SirenBuilder
+ */
+
 const METHOD = new Set(['GET', 'PUT', 'POST', 'DELETE', 'PATCH']);
 const METHOD_LIST = Array.from(METHOD).join(', ');
 
@@ -105,6 +110,11 @@ class SirenAction {
     if (this._fields == null) {
       this._fields = [];
     }
+    for (let i = 0; i < this._fields.length; ++i) {
+      if (this._fields[i]._name === name) {
+        throw new Error('field name MUST be unique');
+      }
+    }
     this._fields.push(field.copy().setName(name));
     return this;
   }
@@ -194,6 +204,7 @@ class SirenAction {
   /**
    * Constructs an empty Siren action builder.
    * @return {SirenAction}
+   * @alias module:SirenBuilder.action
    */
   static create() {
     return new SirenAction();
@@ -278,6 +289,11 @@ class SirenEntity {
   addAction(name, action) {
     if (this._actions == null) {
       this._actions = [];
+    }
+    for (let i = 0; i < this._actions.length; ++i) {
+      if (this._actions[i]._name === name) {
+        throw new Error('action name MUST be unique');
+      }
     }
     this._actions.push(action.copy().setName(name));
     return this;
@@ -375,6 +391,7 @@ class SirenEntity {
   /**
    * Constructs an empty Siren entity builder.
    * @return {SirenEntity}
+   * @alias module:SirenBuilder.entity
    */
   static create() {
     return new SirenEntity();
@@ -519,6 +536,7 @@ class SirenField {
   /**
    * Constructs an empty Siren field builder.
    * @return {SirenField}
+   * @alias module:SirenBuilder.field
    */
   static create() {
     return new SirenField();
@@ -664,17 +682,13 @@ class SirenLink {
   /**
    * Constructs an empty Siren link builder.
    * @return {SirenLink}
+   * @alias module:SirenBuilder.link
    */
   static create() {
     return new SirenLink();
   }
 
 }
-
-exports.Action = SirenAction;
-exports.Entity = SirenEntity;
-exports.Field = SirenField;
-exports.Link = SirenLink;
 
 exports.action = SirenAction.create;
 exports.entity = SirenEntity.create;

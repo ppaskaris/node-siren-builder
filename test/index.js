@@ -271,7 +271,7 @@ Tap.test('SirenLink', (t) => {
   t.done();
 });
 
-Tap.test('readme example', (t) => {
+Tap.test('siren example', (t) => {
   const actual = Siren.entity()
     .addClass('order')
     .addProperty('orderNumber', 42)
@@ -350,6 +350,53 @@ Tap.test('readme example', (t) => {
       { 'rel': ['self'], 'href': 'http://api.x.io/orders/42' },
       { 'rel': ['previous'], 'href': 'http://api.x.io/orders/41' },
       { 'rel': ['next'], 'href': 'http://api.x.io/orders/43' }
+    ]
+  };
+  t.deepEqual(actual, expected);
+  t.done();
+});
+
+Tap.test('readme example', (t) => {
+  const actual = Siren.entity()
+    .addClass('home')
+    .addProperty('version', '2.4.1')
+    .addProperty('health', 'green')
+    .addAction('find-widget', Siren.action()
+      .setTitle('Find Widget')
+      .setMethod('GET')
+      .setHref('https://api.example.org/widgets/search')
+      .setType('application/x-www-form-urlencoded')
+      .addField('q', Siren.field()
+        .setType('text')))
+    .addLink('self', Siren.link()
+      .setHref('https://api.example.org/'))
+    .toJSON();
+  const expected = {
+    class: ['home'],
+    properties: {
+      version: '2.4.1',
+      health: 'green'
+    },
+    actions: [
+      {
+        name: 'find-widget',
+        method: 'GET',
+        href: 'https://api.example.org/widgets/search',
+        title: 'Find Widget',
+        type: 'application/x-www-form-urlencoded',
+        fields: [
+          {
+            name: 'q',
+            type: 'text'
+          }
+        ]
+      }
+    ],
+    links: [
+      {
+        rel: ['self'],
+        href: 'https://api.example.org/'
+      }
     ]
   };
   t.deepEqual(actual, expected);
