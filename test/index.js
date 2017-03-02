@@ -369,6 +369,33 @@ Tap.test('siren example', (t) => {
   t.done();
 });
 
+Tap.test('addProperties', (t) => {
+  const actual = Siren.entity()
+    .addProperty('beforeProp', 'should be kept')
+    .addProperty('name', 'will be overridden')
+    .addProperties({
+      'name': 'overrides previous prop',
+      'orderNumber': 42,
+      'itemCount': 3,
+      'status': 'pending'
+    })
+    .addProperty('afterProp', 'should be kept')
+    .addProperty('status', 'overrides pending')
+    .toJSON();
+  const expected = {
+    'properties': {
+      'orderNumber': 42,
+      'itemCount': 3,
+      'status': 'overrides pending',
+      'name': 'overrides previous prop',
+      'beforeProp': 'should be kept',
+      'afterProp': 'should be kept'
+    }
+  };
+  t.deepEqual(actual, expected);
+  t.done();
+});
+
 Tap.test('readme example', (t) => {
   const actual = Siren.entity()
     .addClass('home')

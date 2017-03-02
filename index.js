@@ -267,6 +267,24 @@ class SirenEntity {
   }
 
   /**
+   * Adds a property for each key/value pair in the given object.
+   *
+   * `Object.keys(obj)` is used to enumerate the keys.
+   *
+   * @param {object} obj
+   * @return {SirenEntity}
+   */
+  addProperties(obj) {
+    const keys = Object.keys(obj);
+    let key;
+    for (let i = 0; i < keys.length; ++i) {
+      key = keys[i];
+      this.addProperty(key, obj[key]);
+    }
+    return this;
+  }
+
+  /**
    * Adds an entity as either an embedded representation or link.
    * @param {(String|String[])} rel
    * @param {(SirenEntity|SirenLink)} entity

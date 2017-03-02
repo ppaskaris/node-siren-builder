@@ -28,6 +28,7 @@ A fluent Siren hypermedia representation builder.
             * [.addClass(className)](#module_SirenBuilder..SirenEntity+addClass) ⇒ <code>SirenEntity</code>
             * [.setRel(rel)](#module_SirenBuilder..SirenEntity+setRel) ⇒ <code>SirenEntity</code>
             * [.addProperty(key, value)](#module_SirenBuilder..SirenEntity+addProperty) ⇒ <code>SirenEntity</code>
+            * [.addProperties(obj)](#module_SirenBuilder..SirenEntity+addProperties) ⇒ <code>SirenEntity</code>
             * [.addEntity(rel, entity)](#module_SirenBuilder..SirenEntity+addEntity) ⇒ <code>SirenEntity</code>
             * [.addAction(name, action)](#module_SirenBuilder..SirenEntity+addAction) ⇒ <code>SirenEntity</code>
             * [.addLink(rel, link)](#module_SirenBuilder..SirenEntity+addLink) ⇒ <code>SirenEntity</code>
@@ -212,6 +213,7 @@ Siren entity builder.
     * [.addClass(className)](#module_SirenBuilder..SirenEntity+addClass) ⇒ <code>SirenEntity</code>
     * [.setRel(rel)](#module_SirenBuilder..SirenEntity+setRel) ⇒ <code>SirenEntity</code>
     * [.addProperty(key, value)](#module_SirenBuilder..SirenEntity+addProperty) ⇒ <code>SirenEntity</code>
+    * [.addProperties(obj)](#module_SirenBuilder..SirenEntity+addProperties) ⇒ <code>SirenEntity</code>
     * [.addEntity(rel, entity)](#module_SirenBuilder..SirenEntity+addEntity) ⇒ <code>SirenEntity</code>
     * [.addAction(name, action)](#module_SirenBuilder..SirenEntity+addAction) ⇒ <code>SirenEntity</code>
     * [.addLink(rel, link)](#module_SirenBuilder..SirenEntity+addLink) ⇒ <code>SirenEntity</code>
@@ -257,6 +259,19 @@ Adds a property key-value pair.
 | --- | --- |
 | key | <code>String</code> | 
 | value | <code>Any</code> | 
+
+<a name="module_SirenBuilder..SirenEntity+addProperties"></a>
+
+#### sirenEntity.addProperties(obj) ⇒ <code>SirenEntity</code>
+Adds a property for each key/value pair in the given object.
+
+`Object.keys(obj)` is used to enumerate the keys.
+
+**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+
+| Param | Type |
+| --- | --- |
+| obj | <code>object</code> | 
 
 <a name="module_SirenBuilder..SirenEntity+addEntity"></a>
 
