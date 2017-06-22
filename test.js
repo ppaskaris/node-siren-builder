@@ -1,37 +1,10 @@
 'use strict';
 
-const Siren = require('../');
 const Tap = require('tap');
+const Siren = require('./index');
 
 Tap.test('SirenAction', (t) => {
-
-  const incomplete = Siren.action();
-  t.throws(() => {
-    incomplete.toJSON();
-  });
-
-  incomplete.setName('test');
-  t.throws(() => {
-    incomplete.toJSON();
-  });
-
-  incomplete.setHref('test');
-  t.doesNotThrow(() => {
-    incomplete.toJSON();
-  });
-
-  t.throws(() => {
-    incomplete.setMethod('TRACE');
-  });
-
-  const conflict = Siren.action()
-    .addField('duplicate', Siren.field());
-  t.throws(() => {
-    conflict.addField('duplicate', Siren.field());
-  });
-
   const action = Siren.action()
-    .copy()
     .clone()
     .setName('replace-avatar')
     .addClass('upload')
@@ -41,7 +14,8 @@ Tap.test('SirenAction', (t) => {
     .setType('image/jpeg')
     .addField('csrf_token', Siren.field()
       .setType('hidden')
-      .setValue('MUyFhg+Ah1I5Iz/jbbHwC2Ip/DqCYZFPncFTp9HnTmU='));
+      .setValue('MUyFhg+Ah1I5Iz/jbbHwC2Ip/DqCYZFPncFTp9HnTmU='))
+    .clone();
   const expected = {
     name: 'replace-avatar',
     class: ['upload'],
@@ -59,15 +33,6 @@ Tap.test('SirenAction', (t) => {
   };
   t.deepEqual(action.toJSON(), expected);
 
-  const copy = action.copy();
-  t.notEqual(copy, action);
-  t.deepEqual(copy.toJSON(), action.toJSON());
-  copy.addField('krillin', Siren.field());
-  copy.addClass('potatos');
-  t.deepEqual(copy.toJSON(), action.toJSON());
-  copy.setType('image/png');
-  t.deepInequal(copy.toJSON(), action.toJSON());
-
   const clone = action.clone();
   t.notEqual(clone, action);
   t.deepEqual(clone.toJSON(), action.toJSON());
@@ -84,23 +49,12 @@ Tap.test('SirenAction', (t) => {
 });
 
 Tap.test('SirenEntity', (t) => {
-  const incomplete = Siren.entity();
-  t.deepEqual(incomplete.toJSON(), {});
-
-
-  const conflict = Siren.entity()
-    .addAction('duplicate', Siren.action());
-  t.throws(() => {
-    conflict.addAction('duplicate', Siren.action());
-  });
-
   const entity = Siren.entity()
-    .copy()
     .clone()
     .addClass('home')
     .setRel('help')
     .addProperty('salutation', 'Greetings!')
-    .addProperty('hapiness', '7/10')
+    .addProperty('happiness', '7/10')
     .addEntity('next', Siren.entity().addProperty('salutation', 'Hallo!'))
     .addEntity('prev', Siren.link().setHref('https://api.example.org/yo'))
     .addAction('reply', Siren.action()
@@ -109,14 +63,15 @@ Tap.test('SirenEntity', (t) => {
       .addField('response', Siren.field()
         .setType('text')))
     .addLink('self', Siren.link()
-      .setHref('https://api.example.org/greetings'));
+      .setHref('https://api.example.org/greetings'))
+    .clone();
 
   const expected = {
     class: ['home'],
     rel: ['help'],
     properties: {
       salutation: 'Greetings!',
-      hapiness: '7/10'
+      happiness: '7/10'
     },
     entities: [
       {
@@ -152,17 +107,6 @@ Tap.test('SirenEntity', (t) => {
   };
   t.deepEqual(entity.toJSON(), expected);
 
-  const copy = entity.copy();
-  t.notEqual(copy, entity);
-  t.deepEqual(copy.toJSON(), entity.toJSON());
-  copy.addAction('logout', Siren.action()
-    .setHref('https://api.example.org/sign-out'));
-  copy.addLink('home', Siren.link()
-    .setHref('https://api.example.org'));
-  t.deepEqual(copy.toJSON(), entity.toJSON());
-  copy.setRel('spooky');
-  t.deepInequal(copy.toJSON(), entity.toJSON());
-
   const clone = entity.clone();
   t.notEqual(clone, entity);
   t.deepEqual(clone.toJSON(), entity.toJSON());
@@ -183,24 +127,14 @@ Tap.test('SirenEntity', (t) => {
 });
 
 Tap.test('SirenField', (t) => {
-  const incomplete = Siren.field();
-  t.throws(() => {
-    incomplete.toJSON();
-  });
-
-  incomplete.setName('test');
-  t.doesNotThrow(() => {
-    incomplete.toJSON();
-  });
-
   const field = Siren.field()
-    .copy()
     .clone()
     .setName('telephone')
     .addClass('required')
     .setType('tel')
     .setValue('+X (XXX) XXX-XXXX')
-    .setTitle('International Phone No.');
+    .setTitle('International Phone No.')
+    .clone();
   const expected = {
     name: 'telephone',
     class: ['required'],
@@ -209,14 +143,6 @@ Tap.test('SirenField', (t) => {
     title: 'International Phone No.'
   };
   t.deepEqual(field.toJSON(), expected);
-
-  const copy = field.copy();
-  t.notEqual(copy, field);
-  t.deepEqual(copy.toJSON(), field.toJSON());
-  copy.addClass('spooky');
-  t.deepEqual(copy.toJSON(), field.toJSON());
-  copy.setName('phone_number');
-  t.deepInequal(copy.toJSON(), field.toJSON());
 
   const clone = field.clone();
   t.notEqual(clone, field);
@@ -232,29 +158,14 @@ Tap.test('SirenField', (t) => {
 });
 
 Tap.test('SirenLink', (t) => {
-  const incomplete = Siren.link();
-  t.throws(() => {
-    incomplete.toJSON();
-  });
-
-  incomplete.setRel('about');
-  t.throws(() => {
-    incomplete.toJSON();
-  });
-
-  incomplete.setHref('https://api.example.org/about-us');
-  t.doesNotThrow(() => {
-    incomplete.toJSON();
-  });
-
   const link = Siren.link()
-    .copy()
     .clone()
     .setRel(['next', 'last'])
     .addClass('page')
     .setHref('https://api.example.org/items?page=2')
     .setTitle('Page 2')
-    .setType('application/vnd.siren+json');
+    .setType('application/vnd.siren+json')
+    .clone();
   const expected = {
     rel: ['next', 'last'],
     class: ['page'],
@@ -263,14 +174,6 @@ Tap.test('SirenLink', (t) => {
     type: 'application/vnd.siren+json'
   };
   t.deepEqual(link.toJSON(), expected);
-
-  const copy = link.copy();
-  t.notEqual(copy, link);
-  t.deepEqual(copy.toJSON(), link.toJSON());
-  copy.addClass('spooky');
-  t.deepEqual(copy.toJSON(), link.toJSON());
-  copy.setTitle('Page Two');
-  t.deepInequal(copy.toJSON(), link.toJSON());
 
   const clone = link.clone();
   t.notEqual(clone, link);

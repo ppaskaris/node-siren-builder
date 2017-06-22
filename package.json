@@ -11,7 +11,7 @@
   "scripts": {
     "build:docs": "jsdoc2md index.js > API.md",
     "pretest": "eslint --format=codeframe --ignore-path .gitignore . ",
-    "test": "tap test/*.js --reporter=classic --coverage"
+    "test": "tap test.js --reporter=classic --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,8 +25,8 @@
   "homepage": "https://github.com/ppaskaris/node-siren-builder#readme",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^3.15.0",
-    "jsdoc-to-markdown": "^2.0.1",
+    "eslint": "4.0.0",
+    "jsdoc-to-markdown": "3.0.0",
     "tap": "^10.0.2"
   }
 }

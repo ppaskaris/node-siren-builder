@@ -20,7 +20,6 @@ A fluent Siren hypermedia representation builder.
             * [.setTitle(title)](#module_SirenBuilder..SirenAction+setTitle) ⇒ <code>SirenLink</code>
             * [.setType(type)](#module_SirenBuilder..SirenAction+setType) ⇒ <code>SirenAction</code>
             * [.addField(name, field)](#module_SirenBuilder..SirenAction+addField) ⇒ <code>SirenAction</code>
-            * [.copy()](#module_SirenBuilder..SirenAction+copy) ⇒ <code>SirenAction</code>
             * [.clone()](#module_SirenBuilder..SirenAction+clone) ⇒ <code>SirenAction</code>
             * [.toJSON()](#module_SirenBuilder..SirenAction+toJSON) ⇒ <code>object</code>
         * [~SirenEntity](#module_SirenBuilder..SirenEntity)
@@ -32,7 +31,6 @@ A fluent Siren hypermedia representation builder.
             * [.addEntity(rel, entity)](#module_SirenBuilder..SirenEntity+addEntity) ⇒ <code>SirenEntity</code>
             * [.addAction(name, action)](#module_SirenBuilder..SirenEntity+addAction) ⇒ <code>SirenEntity</code>
             * [.addLink(rel, link)](#module_SirenBuilder..SirenEntity+addLink) ⇒ <code>SirenEntity</code>
-            * [.copy()](#module_SirenBuilder..SirenEntity+copy) ⇒ <code>SirenEntity</code>
             * [.clone()](#module_SirenBuilder..SirenEntity+clone) ⇒ <code>SirenEntity</code>
             * [.toJSON()](#module_SirenBuilder..SirenEntity+toJSON) ⇒ <code>object</code>
         * [~SirenField](#module_SirenBuilder..SirenField)
@@ -42,7 +40,6 @@ A fluent Siren hypermedia representation builder.
             * [.setType(type)](#module_SirenBuilder..SirenField+setType) ⇒ <code>SirenField</code>
             * [.setValue(value)](#module_SirenBuilder..SirenField+setValue) ⇒ <code>SirenField</code>
             * [.setTitle(title)](#module_SirenBuilder..SirenField+setTitle) ⇒ <code>SirenField</code>
-            * [.copy()](#module_SirenBuilder..SirenField+copy) ⇒ <code>SirenField</code>
             * [.clone()](#module_SirenBuilder..SirenField+clone) ⇒ <code>SirenField</code>
             * [.toJSON()](#module_SirenBuilder..SirenField+toJSON) ⇒ <code>object</code>
         * [~SirenLink](#module_SirenBuilder..SirenLink)
@@ -52,7 +49,6 @@ A fluent Siren hypermedia representation builder.
             * [.setHref(href)](#module_SirenBuilder..SirenLink+setHref) ⇒ <code>SirenLink</code>
             * [.setTitle(title)](#module_SirenBuilder..SirenLink+setTitle) ⇒ <code>SirenLink</code>
             * [.setType(type)](#module_SirenBuilder..SirenLink+setType) ⇒ <code>SirenLink</code>
-            * [.copy()](#module_SirenBuilder..SirenLink+copy) ⇒ <code>SirenLink</code>
             * [.clone()](#module_SirenBuilder..SirenLink+clone) ⇒ <code>SirenLink</code>
             * [.toJSON()](#module_SirenBuilder..SirenLink+toJSON) ⇒ <code>object</code>
 
@@ -61,31 +57,31 @@ A fluent Siren hypermedia representation builder.
 ### SirenBuilder.action() ⇒ <code>SirenAction</code>
 Constructs an empty Siren action builder.
 
-**Kind**: static method of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: static method of [<code>SirenBuilder</code>](#module_SirenBuilder)
 <a name="module_SirenBuilder.entity"></a>
 
 ### SirenBuilder.entity() ⇒ <code>SirenEntity</code>
 Constructs an empty Siren entity builder.
 
-**Kind**: static method of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: static method of [<code>SirenBuilder</code>](#module_SirenBuilder)
 <a name="module_SirenBuilder.field"></a>
 
 ### SirenBuilder.field() ⇒ <code>SirenField</code>
 Constructs an empty Siren field builder.
 
-**Kind**: static method of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: static method of [<code>SirenBuilder</code>](#module_SirenBuilder)
 <a name="module_SirenBuilder.link"></a>
 
 ### SirenBuilder.link() ⇒ <code>SirenLink</code>
 Constructs an empty Siren link builder.
 
-**Kind**: static method of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: static method of [<code>SirenBuilder</code>](#module_SirenBuilder)
 <a name="module_SirenBuilder..SirenAction"></a>
 
 ### SirenBuilder~SirenAction
 Siren action builder.
 
-**Kind**: inner class of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: inner class of [<code>SirenBuilder</code>](#module_SirenBuilder)
 
 * [~SirenAction](#module_SirenBuilder..SirenAction)
     * [new SirenAction()](#new_module_SirenBuilder..SirenAction_new)
@@ -96,7 +92,6 @@ Siren action builder.
     * [.setTitle(title)](#module_SirenBuilder..SirenAction+setTitle) ⇒ <code>SirenLink</code>
     * [.setType(type)](#module_SirenBuilder..SirenAction+setType) ⇒ <code>SirenAction</code>
     * [.addField(name, field)](#module_SirenBuilder..SirenAction+addField) ⇒ <code>SirenAction</code>
-    * [.copy()](#module_SirenBuilder..SirenAction+copy) ⇒ <code>SirenAction</code>
     * [.clone()](#module_SirenBuilder..SirenAction+clone) ⇒ <code>SirenAction</code>
     * [.toJSON()](#module_SirenBuilder..SirenAction+toJSON) ⇒ <code>object</code>
 
@@ -110,103 +105,97 @@ Constructs a new Siren action builder.
 #### sirenAction.setName(name) ⇒ <code>SirenAction</code>
 Sets the name.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
+| name | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+addClass"></a>
 
 #### sirenAction.addClass(className) ⇒ <code>SirenAction</code>
 Adds a class.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| className | <code>String</code> | 
+| className | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+setMethod"></a>
 
 #### sirenAction.setMethod(method) ⇒ <code>SirenAction</code>
 Sets the method.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| method | <code>String</code> | 
+| method | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+setHref"></a>
 
 #### sirenAction.setHref(href) ⇒ <code>SirenLink</code>
 Sets the href.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| href | <code>String</code> | 
+| href | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+setTitle"></a>
 
 #### sirenAction.setTitle(title) ⇒ <code>SirenLink</code>
 Sets the title.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| title | <code>String</code> | 
+| title | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+setType"></a>
 
 #### sirenAction.setType(type) ⇒ <code>SirenAction</code>
 Sets the type.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| type | <code>String</code> | 
+| type | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenAction+addField"></a>
 
 #### sirenAction.addField(name, field) ⇒ <code>SirenAction</code>
 Adds a field.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
-| field | <code>SirenField</code> | 
+| name | <code>string</code> |
+| field | <code>SirenField</code> |
 
-<a name="module_SirenBuilder..SirenAction+copy"></a>
-
-#### sirenAction.copy() ⇒ <code>SirenAction</code>
-Constructs a shallow copy.
-
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
 <a name="module_SirenBuilder..SirenAction+clone"></a>
 
 #### sirenAction.clone() ⇒ <code>SirenAction</code>
 Constructs a deep copy.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 <a name="module_SirenBuilder..SirenAction+toJSON"></a>
 
 #### sirenAction.toJSON() ⇒ <code>object</code>
 Builds the Siren action.
 
-**Kind**: instance method of <code>[SirenAction](#module_SirenBuilder..SirenAction)</code>  
+**Kind**: instance method of [<code>SirenAction</code>](#module_SirenBuilder..SirenAction)
 <a name="module_SirenBuilder..SirenEntity"></a>
 
 ### SirenBuilder~SirenEntity
 Siren entity builder.
 
-**Kind**: inner class of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: inner class of [<code>SirenBuilder</code>](#module_SirenBuilder)
 
 * [~SirenEntity](#module_SirenBuilder..SirenEntity)
     * [new SirenEntity()](#new_module_SirenBuilder..SirenEntity_new)
@@ -217,7 +206,6 @@ Siren entity builder.
     * [.addEntity(rel, entity)](#module_SirenBuilder..SirenEntity+addEntity) ⇒ <code>SirenEntity</code>
     * [.addAction(name, action)](#module_SirenBuilder..SirenEntity+addAction) ⇒ <code>SirenEntity</code>
     * [.addLink(rel, link)](#module_SirenBuilder..SirenEntity+addLink) ⇒ <code>SirenEntity</code>
-    * [.copy()](#module_SirenBuilder..SirenEntity+copy) ⇒ <code>SirenEntity</code>
     * [.clone()](#module_SirenBuilder..SirenEntity+clone) ⇒ <code>SirenEntity</code>
     * [.toJSON()](#module_SirenBuilder..SirenEntity+toJSON) ⇒ <code>object</code>
 
@@ -231,108 +219,100 @@ Constructs a new Siren entity builder.
 #### sirenEntity.addClass(className) ⇒ <code>SirenEntity</code>
 Adds a class.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| className | <code>String</code> | 
+| className | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenEntity+setRel"></a>
 
 #### sirenEntity.setRel(rel) ⇒ <code>SirenEntity</code>
 Sets the rel.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| rel | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
+| rel | <code>String</code> \| <code>Array.&lt;String&gt;</code> |
 
 <a name="module_SirenBuilder..SirenEntity+addProperty"></a>
 
 #### sirenEntity.addProperty(key, value) ⇒ <code>SirenEntity</code>
 Adds a property key-value pair.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| key | <code>String</code> | 
-| value | <code>Any</code> | 
+| key | <code>string</code> |
+| value | <code>\*</code> |
 
 <a name="module_SirenBuilder..SirenEntity+addProperties"></a>
 
 #### sirenEntity.addProperties(obj) ⇒ <code>SirenEntity</code>
-Adds a property for each key/value pair in the given object.
+Adds a property key-value pair for own enumerable property in `obj`.
 
-`Object.keys(obj)` is used to enumerate the keys.
-
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| obj | <code>object</code> | 
+| obj | <code>object</code> |
 
 <a name="module_SirenBuilder..SirenEntity+addEntity"></a>
 
 #### sirenEntity.addEntity(rel, entity) ⇒ <code>SirenEntity</code>
-Adds an entity as either an embedded representation or link.
+Adds a sub-entity as either an embedded representation or link.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| rel | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
-| entity | <code>SirenEntity</code> &#124; <code>SirenLink</code> | 
+| rel | <code>string</code> \| <code>Array.&lt;string&gt;</code> |
+| entity | <code>SirenEntity</code> \| <code>SirenLink</code> |
 
 <a name="module_SirenBuilder..SirenEntity+addAction"></a>
 
 #### sirenEntity.addAction(name, action) ⇒ <code>SirenEntity</code>
 Adds an action.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
-| action | <code>SirenAction</code> | 
+| name | <code>string</code> |
+| action | <code>SirenAction</code> |
 
 <a name="module_SirenBuilder..SirenEntity+addLink"></a>
 
 #### sirenEntity.addLink(rel, link) ⇒ <code>SirenEntity</code>
 Adds a link.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 
 | Param | Type |
 | --- | --- |
-| rel | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
-| link | <code>SirenLink</code> | 
+| rel | <code>string</code> \| <code>Array.&lt;string&gt;</code> |
+| link | <code>SirenLink</code> |
 
-<a name="module_SirenBuilder..SirenEntity+copy"></a>
-
-#### sirenEntity.copy() ⇒ <code>SirenEntity</code>
-Constructs a shallow copy.
-
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
 <a name="module_SirenBuilder..SirenEntity+clone"></a>
 
 #### sirenEntity.clone() ⇒ <code>SirenEntity</code>
 Constructs a deep copy.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 <a name="module_SirenBuilder..SirenEntity+toJSON"></a>
 
 #### sirenEntity.toJSON() ⇒ <code>object</code>
 Builds the Siren entity.
 
-**Kind**: instance method of <code>[SirenEntity](#module_SirenBuilder..SirenEntity)</code>  
+**Kind**: instance method of [<code>SirenEntity</code>](#module_SirenBuilder..SirenEntity)
 <a name="module_SirenBuilder..SirenField"></a>
 
 ### SirenBuilder~SirenField
 Siren field builder.
 
-**Kind**: inner class of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: inner class of [<code>SirenBuilder</code>](#module_SirenBuilder)
 
 * [~SirenField](#module_SirenBuilder..SirenField)
     * [new SirenField()](#new_module_SirenBuilder..SirenField_new)
@@ -341,7 +321,6 @@ Siren field builder.
     * [.setType(type)](#module_SirenBuilder..SirenField+setType) ⇒ <code>SirenField</code>
     * [.setValue(value)](#module_SirenBuilder..SirenField+setValue) ⇒ <code>SirenField</code>
     * [.setTitle(title)](#module_SirenBuilder..SirenField+setTitle) ⇒ <code>SirenField</code>
-    * [.copy()](#module_SirenBuilder..SirenField+copy) ⇒ <code>SirenField</code>
     * [.clone()](#module_SirenBuilder..SirenField+clone) ⇒ <code>SirenField</code>
     * [.toJSON()](#module_SirenBuilder..SirenField+toJSON) ⇒ <code>object</code>
 
@@ -355,80 +334,74 @@ Constructs a new Siren field builder.
 #### sirenField.setName(name) ⇒ <code>SirenField</code>
 Sets the name.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
+| name | <code>String</code> |
 
 <a name="module_SirenBuilder..SirenField+addClass"></a>
 
 #### sirenField.addClass(className) ⇒ <code>SirenField</code>
 Adds a class.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 
 | Param | Type |
 | --- | --- |
-| className | <code>String</code> | 
+| className | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenField+setType"></a>
 
 #### sirenField.setType(type) ⇒ <code>SirenField</code>
 Sets the type.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 
 | Param | Type |
 | --- | --- |
-| type | <code>String</code> | 
+| type | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenField+setValue"></a>
 
 #### sirenField.setValue(value) ⇒ <code>SirenField</code>
 Sets the value.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 
 | Param | Type |
 | --- | --- |
-| value | <code>Any</code> | 
+| value | <code>\*</code> |
 
 <a name="module_SirenBuilder..SirenField+setTitle"></a>
 
 #### sirenField.setTitle(title) ⇒ <code>SirenField</code>
 Sets the title.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 
 | Param | Type |
 | --- | --- |
-| title | <code>String</code> | 
+| title | <code>string</code> |
 
-<a name="module_SirenBuilder..SirenField+copy"></a>
-
-#### sirenField.copy() ⇒ <code>SirenField</code>
-Constructs a shallow copy.
-
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
 <a name="module_SirenBuilder..SirenField+clone"></a>
 
 #### sirenField.clone() ⇒ <code>SirenField</code>
 Constructs a deep copy.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 <a name="module_SirenBuilder..SirenField+toJSON"></a>
 
 #### sirenField.toJSON() ⇒ <code>object</code>
 Builds the Siren field.
 
-**Kind**: instance method of <code>[SirenField](#module_SirenBuilder..SirenField)</code>  
+**Kind**: instance method of [<code>SirenField</code>](#module_SirenBuilder..SirenField)
 <a name="module_SirenBuilder..SirenLink"></a>
 
 ### SirenBuilder~SirenLink
 Siren link builder.
 
-**Kind**: inner class of <code>[SirenBuilder](#module_SirenBuilder)</code>  
+**Kind**: inner class of [<code>SirenBuilder</code>](#module_SirenBuilder)
 
 * [~SirenLink](#module_SirenBuilder..SirenLink)
     * [new SirenLink()](#new_module_SirenBuilder..SirenLink_new)
@@ -437,7 +410,6 @@ Siren link builder.
     * [.setHref(href)](#module_SirenBuilder..SirenLink+setHref) ⇒ <code>SirenLink</code>
     * [.setTitle(title)](#module_SirenBuilder..SirenLink+setTitle) ⇒ <code>SirenLink</code>
     * [.setType(type)](#module_SirenBuilder..SirenLink+setType) ⇒ <code>SirenLink</code>
-    * [.copy()](#module_SirenBuilder..SirenLink+copy) ⇒ <code>SirenLink</code>
     * [.clone()](#module_SirenBuilder..SirenLink+clone) ⇒ <code>SirenLink</code>
     * [.toJSON()](#module_SirenBuilder..SirenLink+toJSON) ⇒ <code>object</code>
 
@@ -451,71 +423,65 @@ Constructs a new Siren link builder.
 #### sirenLink.setRel(rel) ⇒ <code>SirenLink</code>
 Sets the rel.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 
 | Param | Type |
 | --- | --- |
-| rel | <code>String</code> &#124; <code>Array.&lt;String&gt;</code> | 
+| rel | <code>String</code> \| <code>Array.&lt;String&gt;</code> |
 
 <a name="module_SirenBuilder..SirenLink+addClass"></a>
 
 #### sirenLink.addClass(className) ⇒ <code>SirenLink</code>
 Adds a class.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 
 | Param | Type |
 | --- | --- |
-| className | <code>String</code> | 
+| className | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenLink+setHref"></a>
 
 #### sirenLink.setHref(href) ⇒ <code>SirenLink</code>
 Sets the href.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 
 | Param | Type |
 | --- | --- |
-| href | <code>String</code> | 
+| href | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenLink+setTitle"></a>
 
 #### sirenLink.setTitle(title) ⇒ <code>SirenLink</code>
 Sets the title.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 
 | Param | Type |
 | --- | --- |
-| title | <code>String</code> | 
+| title | <code>string</code> |
 
 <a name="module_SirenBuilder..SirenLink+setType"></a>
 
 #### sirenLink.setType(type) ⇒ <code>SirenLink</code>
 Sets the type.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 
 | Param | Type |
 | --- | --- |
-| type | <code>String</code> | 
+| type | <code>string</code> |
 
-<a name="module_SirenBuilder..SirenLink+copy"></a>
-
-#### sirenLink.copy() ⇒ <code>SirenLink</code>
-Constructs a shallow copy.
-
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
 <a name="module_SirenBuilder..SirenLink+clone"></a>
 
 #### sirenLink.clone() ⇒ <code>SirenLink</code>
 Constructs a deep copy.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)
 <a name="module_SirenBuilder..SirenLink+toJSON"></a>
 
 #### sirenLink.toJSON() ⇒ <code>object</code>
 Builds the Siren link.
 
-**Kind**: instance method of <code>[SirenLink](#module_SirenBuilder..SirenLink)</code>  
+**Kind**: instance method of [<code>SirenLink</code>](#module_SirenBuilder..SirenLink)

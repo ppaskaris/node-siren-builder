@@ -5,15 +5,49 @@
  * @module SirenBuilder
  */
 
-const METHOD = new Set(['GET', 'PUT', 'POST', 'DELETE', 'PATCH']);
-const METHOD_LIST = Array.from(METHOD).join(', ');
-
 function ensureArray(value) {
   if (!Array.isArray(value)) {
     return [value];
   } else {
     return value;
   }
+}
+
+function copyMapAndCloneValuesCallback(value, key) {
+  this.set(key, value.clone());
+}
+
+function copyMapAndCloneValues(source) {
+  const clone = new Map();
+  source.forEach(copyMapAndCloneValuesCallback, clone);
+  return clone;
+}
+
+function mapToJsonWithMutatorCallback(value, key) {
+  const json = value.toJSON();
+  this.mutator(json, key);
+  this.array.push(json);
+}
+
+function mapToJsonWithMutator(source, mutator) {
+  const array = [];
+  const context = { array, mutator };
+  source.forEach(mapToJsonWithMutatorCallback, context);
+  return array;
+}
+
+function mutateWithName(json, name) {
+  if (name != null) {
+    json.name = name;
+  }
+}
+
+function toClone(value) {
+  return value.clone();
+}
+
+function toJSON(value) {
+  return value.toJSON();
 }
 
 /**
@@ -35,10 +69,10 @@ class SirenAction {
   }
 
   /**
-   * Sets the name.
-   * @param {String} name
-   * @return {SirenAction}
-   */
+    * Sets the name.
+    * @param {string} name
+    * @return {SirenAction}
+    */
   setName(name) {
     this._name = name;
     return this;
@@ -46,7 +80,7 @@ class SirenAction {
 
   /**
    * Adds a class.
-   * @param {String} className
+   * @param {string} className
    * @return {SirenAction}
    */
   addClass(className) {
@@ -59,20 +93,17 @@ class SirenAction {
 
   /**
    * Sets the method.
-   * @param {String} method
+   * @param {string} method
    * @return {SirenAction}
    */
   setMethod(method) {
-    if (!METHOD.has(method)) {
-      throw new TypeError('methods MUST be one of ' + METHOD_LIST);
-    }
     this._method = method;
     return this;
   }
 
   /**
    * Sets the href.
-   * @param {String} href
+   * @param {string} href
    * @return {SirenLink}
    */
   setHref(href) {
@@ -82,7 +113,7 @@ class SirenAction {
 
   /**
    * Sets the title.
-   * @param {String} title
+   * @param {string} title
    * @return {SirenLink}
    */
   setTitle(title) {
@@ -92,7 +123,7 @@ class SirenAction {
 
   /**
    * Sets the type.
-   * @param {String} type
+   * @param {string} type
    * @return {SirenAction}
    */
   setType(type) {
@@ -102,37 +133,16 @@ class SirenAction {
 
   /**
    * Adds a field.
-   * @param {String} name
+   * @param {string} name
    * @param {SirenField} field
    * @return {SirenAction}
    */
   addField(name, field) {
     if (this._fields == null) {
-      this._fields = [];
+      this._fields = new Map();
     }
-    for (let i = 0; i < this._fields.length; ++i) {
-      if (this._fields[i]._name === name) {
-        throw new Error('field name MUST be unique');
-      }
-    }
-    this._fields.push(field.copy().setName(name));
+    this._fields.set(name, field);
     return this;
-  }
-
-  /**
-   * Constructs a shallow copy.
-   * @return {SirenAction}
-   */
-  copy() {
-    const copy = new SirenAction();
-    copy._name = this._name;
-    copy._class = this._class;
-    copy._method = this._method;
-    copy._href = this._href;
-    copy._title = this._title;
-    copy._type = this._type;
-    copy._fields = this._fields;
-    return copy;
   }
 
   /**
@@ -160,8 +170,7 @@ class SirenAction {
       clone._type = this._type;
     }
     if (this._fields != null) {
-      clone._fields = this._fields
-        .map((field) => field.clone());
+      clone._fields = copyMapAndCloneValues(this._fields);
     }
     return clone;
   }
@@ -174,8 +183,6 @@ class SirenAction {
     const json = {};
     if (this._name != null) {
       json.name = this._name;
-    } else {
-      throw new Error('action MUST have a name');
     }
     if (this._class != null) {
       json.class = this._class;
@@ -185,8 +192,6 @@ class SirenAction {
     }
     if (this._href != null) {
       json.href = this._href;
-    } else {
-      throw new Error('action MUST have an href');
     }
     if (this._title != null) {
       json.title = this._title;
@@ -195,8 +200,7 @@ class SirenAction {
       json.type = this._type;
     }
     if (this._fields != null) {
-      json.fields = this._fields
-        .map((field) => field.toJSON());
+      json.fields = mapToJsonWithMutator(this._fields, mutateWithName);
     }
     return json;
   }
@@ -210,6 +214,45 @@ class SirenAction {
     return new SirenAction();
   }
 
+}
+
+/**
+ * An entity attached to a Siren entity via a link relation.
+ * @private
+ */
+class SirenEntityAttachment {
+
+  /**
+   * Constructs a new sub-entity.
+   * @param {string[]} rel
+   * @param {(SirenEntity|SirenLink)} entity
+   */
+  constructor(rel, entity) {
+    this._rel = rel;
+    this._entity = entity;
+  }
+
+  /**
+   * Constructs a deep copy.
+   * @return {SirenEntityAttachment}
+   */
+  clone() {
+    const clone = new SirenEntityAttachment(
+      this._rel.slice(),
+      this._entity.clone()
+    );
+    return clone;
+  }
+
+  /**
+   * Builds the Siren sub-entity.
+   * @return {object}
+   */
+  toJSON() {
+    const json = this._entity.toJSON();
+    json.rel = this._rel;
+    return json;
+  }
 }
 
 /**
@@ -231,7 +274,7 @@ class SirenEntity {
 
   /**
    * Adds a class.
-   * @param {String} className
+   * @param {string} className
    * @return {SirenEntity}
    */
   addClass(className) {
@@ -254,8 +297,8 @@ class SirenEntity {
 
   /**
    * Adds a property key-value pair.
-   * @param {String} key
-   * @param {Any} value
+   * @param {string} key
+   * @param {*} value
    * @return {SirenEntity}
    */
   addProperty(key, value) {
@@ -267,26 +310,22 @@ class SirenEntity {
   }
 
   /**
-   * Adds a property for each key/value pair in the given object.
-   *
-   * `Object.keys(obj)` is used to enumerate the keys.
+   * Adds a property key-value pair for own enumerable property in `obj`.
    *
    * @param {object} obj
    * @return {SirenEntity}
    */
   addProperties(obj) {
-    const keys = Object.keys(obj);
-    let key;
-    for (let i = 0; i < keys.length; ++i) {
-      key = keys[i];
-      this.addProperty(key, obj[key]);
+    if (this._properties == null) {
+      this._properties = {};
     }
+    Object.assign(this._properties, obj);
     return this;
   }
 
   /**
-   * Adds an entity as either an embedded representation or link.
-   * @param {(String|String[])} rel
+   * Adds a sub-entity as either an embedded representation or link.
+   * @param {(string|string[])} rel
    * @param {(SirenEntity|SirenLink)} entity
    * @return {SirenEntity}
    */
@@ -294,32 +333,27 @@ class SirenEntity {
     if (this._entities == null) {
       this._entities = [];
     }
-    this._entities.push(entity.copy().setRel(rel));
+    this._entities.push(new SirenEntityAttachment(ensureArray(rel), entity));
     return this;
   }
 
   /**
    * Adds an action.
-   * @param {String} name
+   * @param {string} name
    * @param {SirenAction} action
    * @return {SirenEntity}
    */
   addAction(name, action) {
     if (this._actions == null) {
-      this._actions = [];
+      this._actions = new Map();
     }
-    for (let i = 0; i < this._actions.length; ++i) {
-      if (this._actions[i]._name === name) {
-        throw new Error('action name MUST be unique');
-      }
-    }
-    this._actions.push(action.copy().setName(name));
+    this._actions.set(name, action);
     return this;
   }
 
   /**
    * Adds a link.
-   * @param {(String|String[])} rel
+   * @param {(string|string[])} rel
    * @param {SirenLink} link
    * @return {SirenEntity}
    */
@@ -327,23 +361,8 @@ class SirenEntity {
     if (this._links == null) {
       this._links = [];
     }
-    this._links.push(link.copy().setRel(rel));
+    this._links.push(new SirenEntityAttachment(ensureArray(rel), link));
     return this;
-  }
-
-  /**
-   * Constructs a shallow copy.
-   * @return {SirenEntity}
-   */
-  copy() {
-    const copy = new SirenEntity();
-    copy._class = this._class;
-    copy._rel = this._rel;
-    copy._properties = this._properties;
-    copy._entities = this._entities;
-    copy._actions = this._actions;
-    copy._links = this._links;
-    return copy;
   }
 
   /**
@@ -362,16 +381,13 @@ class SirenEntity {
       clone._properties = Object.assign({}, this._properties);
     }
     if (this._entities != null) {
-      clone._entities = this._entities
-        .map((entity) => entity.clone());
+      clone._entities = this._entities.map(toClone);
     }
     if (this._actions != null) {
-      clone._actions = this._actions
-        .map((action) => action.clone());
+      clone._actions = copyMapAndCloneValues(this._actions);
     }
     if (this._links != null) {
-      clone._links = this._links
-        .map((link) => link.clone());
+      clone._links = this._links.map(toClone);
     }
     return clone;
   }
@@ -392,16 +408,13 @@ class SirenEntity {
       json.properties = this._properties;
     }
     if (this._entities != null) {
-      json.entities = this._entities
-        .map((entity) => entity.toJSON());
+      json.entities = this._entities.map(toJSON);
     }
     if (this._actions != null) {
-      json.actions = this._actions
-        .map((action) => action.toJSON());
+      json.actions = mapToJsonWithMutator(this._actions, mutateWithName);
     }
     if (this._links != null) {
-      json.links = this._links
-        .map((link) => link.toJSON());
+      json.links = this._links.map(toJSON);
     }
     return json;
   }
@@ -445,7 +458,7 @@ class SirenField {
 
   /**
    * Adds a class.
-   * @param {String} className
+   * @param {string} className
    * @return {SirenField}
    */
   addClass(className) {
@@ -458,7 +471,7 @@ class SirenField {
 
   /**
    * Sets the type.
-   * @param {String} type
+   * @param {string} type
    * @return {SirenField}
    */
   setType(type) {
@@ -468,7 +481,7 @@ class SirenField {
 
   /**
    * Sets the value.
-   * @param {Any} value
+   * @param {*} value
    * @return {SirenField}
    */
   setValue(value) {
@@ -479,26 +492,12 @@ class SirenField {
 
   /**
    * Sets the title.
-   * @param {String} title
+   * @param {string} title
    * @return {SirenField}
    */
   setTitle(title) {
     this._title = title;
     return this;
-  }
-
-  /**
-   * Constructs a shallow copy.
-   * @return {SirenField}
-   */
-  copy() {
-    const copy = new SirenField();
-    copy._name = this._name;
-    copy._class = this._class;
-    copy._type = this._type;
-    copy._value = this._value;
-    copy._title = this._title;
-    return copy;
   }
 
   /**
@@ -533,8 +532,6 @@ class SirenField {
     const json = {};
     if (this._name != null) {
       json.name = this._name;
-    } else {
-      throw new Error('field MUST have a name');
     }
     if (this._class != null) {
       json.class = this._class;
@@ -590,7 +587,7 @@ class SirenLink {
 
   /**
    * Adds a class.
-   * @param {String} className
+   * @param {string} className
    * @return {SirenLink}
    */
   addClass(className) {
@@ -603,7 +600,7 @@ class SirenLink {
 
   /**
    * Sets the href.
-   * @param {String} href
+   * @param {string} href
    * @return {SirenLink}
    */
   setHref(href) {
@@ -613,7 +610,7 @@ class SirenLink {
 
   /**
    * Sets the title.
-   * @param {String} title
+   * @param {string} title
    * @return {SirenLink}
    */
   setTitle(title) {
@@ -623,26 +620,12 @@ class SirenLink {
 
   /**
    * Sets the type.
-   * @param {String} type
+   * @param {string} type
    * @return {SirenLink}
    */
   setType(type) {
     this._type = type;
     return this;
-  }
-
-  /**
-   * Constructs a shallow copy.
-   * @return {SirenLink}
-   */
-  copy() {
-    const copy = new SirenLink();
-    copy._rel = this._rel;
-    copy._class = this._class;
-    copy._href = this._href;
-    copy._title = this._title;
-    copy._type = this._type;
-    return copy;
   }
 
   /**
@@ -677,16 +660,12 @@ class SirenLink {
     const json = {};
     if (this._rel != null) {
       json.rel = this._rel;
-    } else {
-      throw new Error('link MUST have a rel');
     }
     if (this._class != null) {
       json.class = this._class;
     }
     if (this._href != null) {
       json.href = this._href;
-    } else {
-      throw new Error('link MUST have an href');
     }
     if (this._title != null) {
       json.title = this._title;
